@@ -1,0 +1,22 @@
+Part A: Section 5 - Run and Test Node.js
+
+
+C:\Users\Admin> docker run -dt -v "%cd%":/app -p 3000:3000 node:12-alpine node /app/test_server.js
+e7d4094a15273c74aaae90c87a7a06d0d0d47e64113c4a53edf5859b37a9b164
+
+C:\Users\Admin>docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+C:\Users\Admin> docker run -dt -v "%cd%":/app -p 3000:3000 node:12-alpine node /app/test_server.js
+887b0c9e38c95be2f61dbd5c272966591a1fcb09cf5fa73a546bf19d6aba9c6c
+
+C:\Users\Admin>cd Desktop
+
+C:\Users\Admin\Desktop> docker run -dt -v "%cd%":/app -p 3000:3000 node:12-alpine node /app/test_server.js
+2dcb73d3fcc029931d6c2b7d231774de740d5ccb3816374c49396f1d6af3988a
+
+C:\Users\Admin\Desktop>docker ps
+CONTAINER ID   IMAGE            COMMAND                  CREATED          STATUS          PORTS                    NAMES
+2dcb73d3fcc0   node:12-alpine   "docker-entrypoint.s…"   14 seconds ago   Up 11 seconds   0.0.0.0:3000->3000/tcp   musing_thompson
+
+C:\Users\Admin\Desktop>
