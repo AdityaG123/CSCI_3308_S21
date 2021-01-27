@@ -1,0 +1,57 @@
+Part A: Section 3 - Introduction to Docker
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~
+$ git --version
+git version 2.30.0.windows.2
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~
+$ git config --global user.name "AdityaG123"
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~
+$ git config --global user.name
+AdityaG123
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~
+$ git config --global user.email "adgo4176@colorado.edu"
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~
+$ git config --global user.email
+adgo4176@colorado.edu
+
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~
+$ git clone https://github.com/CSCI-3308-CU-Boulder/AdityaGopalan_section012_Labs.git
+Cloning into 'AdityaGopalan_section012_Labs'...
+warning: You appear to have cloned an empty repository.
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~
+$ cd
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~
+$ cd AdityaGopalan_section012_Labs
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~/AdityaGopalan_section012_Labs (master)
+$ vi test.txt
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~/AdityaGopalan_section012_Labs (master)
+$ git add .
+warning: LF will be replaced by CRLF in test.txt.
+The file will have its original line endings in your working directory
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~/AdityaGopalan_section012_Labs (master)
+$ git commit -m "Commit"
+[master (root-commit) 0d85a5e] Commit
+ 1 file changed, 2 insertions(+)
+ create mode 100644 test.txt
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~/AdityaGopalan_section012_Labs (master)
+$ git push
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 225 bytes | 225.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/CSCI-3308-CU-Boulder/AdityaGopalan_section012_Labs.git
+ * [new branch]      master -> master
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~/AdityaGopalan_section012_Labs (master)
+$
