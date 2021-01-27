@@ -1,0 +1,137 @@
+Part A: Section 2 - Introduction to Docker
+
+2)	CMD: docker ps -a
+	Result:
+		CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS                      PORTS                NAMES
+		e4a911079501   hello-world         "/hello"                 22 seconds ago   Exited (0) 21 seconds ago                        awesome_jackson
+		b0e4d6bd9258   docker101tutorial   "/docker-entrypoint.…"   6 minutes ago    Up 6 minutes                0.0.0.0:80->80/tcp   docker-tutorial
+		70b3b9905dd1   alpine/git          "git clone https://g…"   9 minutes ago    Exited (0) 9 minutes ago                         repo
+
+3)	CMD: docker rm awesome_jackson
+	Result:
+		CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS                      PORTS                NAMES
+		b0e4d6bd9258   docker101tutorial   "/docker-entrypoint.…"   24 minutes ago   Up 24 minutes               0.0.0.0:80->80/tcp   docker-tutorial
+		70b3b9905dd1   alpine/git          "git clone https://g…"   27 minutes ago   Exited (0) 27 minutes ago                        repo
+
+4)	CMD: docker run --rm hello-world
+	Result:
+		CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS                      PORTS                NAMES
+		b0e4d6bd9258   docker101tutorial   "/docker-entrypoint.…"   24 minutes ago   Up 24 minutes               0.0.0.0:80->80/tcp   docker-tutorial
+		70b3b9905dd1   alpine/git          "git clone https://g…"   27 minutes ago   Exited (0) 27 minutes ago                        repo
+
+5)	CMD: docker run -it ubuntu bash
+	Result:	
+		root@cc29fe20cc6d:/#
+
+	CMD: exit
+	Result: 
+		C:\Users\Admin>
+
+5)	CMD: docker run -dt ubuntu bash
+	Result:
+		edd823d9965fdc82f2f665dc03690a16fbe690cd9225015962a26133ed6c8750
+	
+	CMD: docker ps
+	Result:
+		CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS          PORTS                NAMES
+		edd823d9965f   ubuntu              "bash"                   8 seconds ago    Up 7 seconds                         nice_swanson
+		b0e4d6bd9258   docker101tutorial   "/docker-entrypoint.…"   32 minutes ago   Up 32 minutes   0.0.0.0:80->80/tcp   docker-tutorial
+
+	CMD: docker rm nice_swanson
+	Result:
+		Error response from daemon: You cannot remove a running container edd823d9965fdc82f2f665dc03690a16fbe690cd9225015962a26133ed6c8750. Stop the container before attempting removal or force remove
+
+	CMD: docker rm -f nice_swanson
+	Result:
+		nice_swanson
+	
+	CMD: docker ps
+	Result:
+		CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS                      PORTS                NAMES
+		b0e4d6bd9258   docker101tutorial   "/docker-entrypoint.…"   34 minutes ago   Up 34 minutes               0.0.0.0:80->80/tcp   docker-tutorial
+		70b3b9905dd1   alpine/git          "git clone https://g…"   37 minutes ago   Exited (0) 37 minutes ago                        repo
+
+
+
+
+Part A: Section 3 - Introduction to Docker
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~
+$ git --version
+git version 2.30.0.windows.2
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~
+$ git config --global user.name "AdityaG123"
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~
+$ git config --global user.name
+AdityaG123
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~
+$ git config --global user.email "adgo4176@colorado.edu"
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~
+$ git config --global user.email
+adgo4176@colorado.edu
+
+
+Admin@DESKTOP-B4IFH31 MINGW64 ~
+$ git clone https://github.com/CSCI-3308-CU-Boulder/AdityaGopalan_section012_Labs.git
+Part A: Section 4 - Pull & Test PostgreSQL
+
+C:\Users\Admin>docker run -dt -v postgres-data:/var/lib/postgresql/data -e POSTGRES_PASSWORD=password postgres:latest
+Unable to find image 'postgres:latest' locally
+latest: Pulling from library/postgres
+a076a628af6f: Pull complete                                                                                             d54fa0e0eb76: Pull complete                                                                                             8950a7ea6876: Pull complete                                                                                             1cc02b1df09e: Pull complete                                                                                             06f548e51228: Pull complete                                                                                             74665692d4ea: Pull complete                                                                                             235e34eb13ab: Pull complete                                                                                             4ad7ef5e2e79: Pull complete                                                                                             76670339b0f8: Pull complete                                                                                             496fa0539f99: Pull complete                                                                                             f32ecbdf3b52: Pull complete                                                                                             7536b8fe81ac: Pull complete                                                                                             b147719f22c0: Pull complete                                                                                             22f2f0aa94ae: Pull complete                                                                                             Digest: sha256:c32f3f8364d79f71958c9ada74c43c2033d7e13d9d5fc21d3ba89322e6559c9d
+Status: Downloaded newer image for postgres:latest
+8822bca37e6723752890f275029213973744cfdd3333f7c1f78b1fa47e1da9e0
+
+C:\Users\Admin>
+C:\Users\Admin>docker ps
+CONTAINER ID   IMAGE             COMMAND                  CREATED          STATUS         PORTS      NAMES
+8822bca37e67   postgres:latest   "docker-entrypoint.s…"   11 seconds ago   Up 8 seconds   5432/tcp   epic_driscoll
+
+C:\Users\Admin>docker exec -it 8822bca37e67
+"docker exec" requires at least 2 arguments.
+See 'docker exec --help'.
+
+Usage:  docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+
+Run a command in a running container
+
+C:\Users\Admin>docker exec -it 8822bca37e67 bash
+root@8822bca37e67:/# psql -h localhost -U postgres
+psql (13.1 (Debian 13.1-1.pgdg100+1))
+Type "help" for help.
+
+postgres=# create database practicedb;
+CREATE DATABASE
+postgres=# \c practicedb;
+You are now connected to database "practicedb" as user "postgres".
+practicedb=# create table if not exists store(id serial, sname varchar(40) not null, qty integer not null, price float not null, primary key(id));
+CREATE TABLE
+practicedb=# create table if not exists store(id serial, sname varchar(40) not null, qty integer not null, price float not null, primary key(id));
+NOTICE:  relation "store" already exists, skipping
+CREATE TABLE
+practicedb=# create table if not exists store(id serial, sname varchar(40) not null, qty integer not null, price float not null, primary key(id));
+NOTICE:  relation "store" already exists, skipping
+CREATE TABLE
+practicedb=# insert into store (sname, qty, price) values ('apple', 10, 1),('pear', 5, 2),('banana', 10, 1.5),('lemon', 100, 0.1),('orange', 50, 0.2);
+INSERT 0 5
+practicedb=# select * from store;
+ id | sname  | qty | price
+----+--------+-----+-------
+  1 | apple  |  10 |     1
+  2 | pear   |   5 |     2
+  3 | banana |  10 |   1.5
+  4 | lemon  | 100 |   0.1
+  5 | orange |  50 |   0.2
+(5 rows)
+
+practicedb=# \q
+root@8822bca37e67:/# exit
+exit
+
+C:\Users\Admin>docker rm -f 8822bca37e67
+8822bca37e67
+
