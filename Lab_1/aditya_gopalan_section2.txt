@@ -1,0 +1,52 @@
+Part A: Section 2 - Introduction to Docker
+
+2)	CMD: docker ps -a
+	Result:
+		CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS                      PORTS                NAMES
+		e4a911079501   hello-world         "/hello"                 22 seconds ago   Exited (0) 21 seconds ago                        awesome_jackson
+		b0e4d6bd9258   docker101tutorial   "/docker-entrypoint.…"   6 minutes ago    Up 6 minutes                0.0.0.0:80->80/tcp   docker-tutorial
+		70b3b9905dd1   alpine/git          "git clone https://g…"   9 minutes ago    Exited (0) 9 minutes ago                         repo
+
+3)	CMD: docker rm awesome_jackson
+	Result:
+		CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS                      PORTS                NAMES
+		b0e4d6bd9258   docker101tutorial   "/docker-entrypoint.…"   24 minutes ago   Up 24 minutes               0.0.0.0:80->80/tcp   docker-tutorial
+		70b3b9905dd1   alpine/git          "git clone https://g…"   27 minutes ago   Exited (0) 27 minutes ago                        repo
+
+4)	CMD: docker run --rm hello-world
+	Result:
+		CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS                      PORTS                NAMES
+		b0e4d6bd9258   docker101tutorial   "/docker-entrypoint.…"   24 minutes ago   Up 24 minutes               0.0.0.0:80->80/tcp   docker-tutorial
+		70b3b9905dd1   alpine/git          "git clone https://g…"   27 minutes ago   Exited (0) 27 minutes ago                        repo
+
+5)	CMD: docker run -it ubuntu bash
+	Result:	
+		root@cc29fe20cc6d:/#
+
+	CMD: exit
+	Result: 
+		C:\Users\Admin>
+
+5)	CMD: docker run -dt ubuntu bash
+	Result:
+		edd823d9965fdc82f2f665dc03690a16fbe690cd9225015962a26133ed6c8750
+	
+	CMD: docker ps
+	Result:
+		CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS          PORTS                NAMES
+		edd823d9965f   ubuntu              "bash"                   8 seconds ago    Up 7 seconds                         nice_swanson
+		b0e4d6bd9258   docker101tutorial   "/docker-entrypoint.…"   32 minutes ago   Up 32 minutes   0.0.0.0:80->80/tcp   docker-tutorial
+
+	CMD: docker rm nice_swanson
+	Result:
+		Error response from daemon: You cannot remove a running container edd823d9965fdc82f2f665dc03690a16fbe690cd9225015962a26133ed6c8750. Stop the container before attempting removal or force remove
+
+	CMD: docker rm -f nice_swanson
+	Result:
+		nice_swanson
+	
+	CMD: docker ps
+	Result:
+		CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS                      PORTS                NAMES
+		b0e4d6bd9258   docker101tutorial   "/docker-entrypoint.…"   34 minutes ago   Up 34 minutes               0.0.0.0:80->80/tcp   docker-tutorial
+		70b3b9905dd1   alpine/git          "git clone https://g…"   37 minutes ago   Exited (0) 37 minutes ago                        repo
