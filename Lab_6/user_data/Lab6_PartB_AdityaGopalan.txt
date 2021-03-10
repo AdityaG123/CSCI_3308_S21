@@ -1,0 +1,116 @@
+Lab #6 Take Home
+Your name: Aditya Gopalan
+
+
+---------------------------------------- Question 1 Query ---------------------------------------- 
+
+SELECT ship_city,COUNT(ship_city) FROM orders GROUP BY ship_city ORDER BY COUNT(ship_city) DESC LIMIT 1;
+
+---------------------------------------- Question 1 Results ---------------------------------------- 					
+   
+   ship_city    | count
+----------------+-------
+ Rio de Janeiro |    34
+(1 row)
+
+---------------------------------------- Question 2 Query ---------------------------------------- 
+
+CREATE VIEW graz AS SELECT orders.order_id,order_details.quantity FROM orders INNER JOIN order_details ON (orders.order_id = order_details.order_id) WHERE ship_city='Graz' ORDER BY order_details.quantity;
+
+CREATE VIEW lowest AS SELECT order_id,sum(quantity) FROM graz GROUP BY order_id ORDER BY sum(quantity) LIMIT 1;
+
+CREATE VIEW sm_order AS SELECT lowest.order_id,product_id FROM order_details INNER JOIN lowest ON (lowest.order_id = order_details.order_id);
+
+SELECT product_name FROM products INNER JOIN sm_order ON (sm_order.product_id = products.product_id);
+
+---------------------------------------- Question 2 Results ---------------------------------------- 					
+
+         product_name
+-------------------------------
+ Tofu
+ Singaporean Hokkien Fried Mee
+(2 rows)
+
+---------------------------------------- Question 3 Query ---------------------------------------- 
+
+CREATE VIEW customer AS SELECT DISTINCT customer_id,COUNT(customer_id) FROM orders GROUP BY customer_id;
+
+CREATE VIEW above AS SELECT customer_id,count FROM customer WHERE count > (CAST((SELECT COUNT(*) FROM orders) AS float))/(CAST((SELECT COUNT(*) FROM customers) AS float)) ORDER BY count DESC;
+
+SELECT company_name FROM customers INNER JOIN above ON (above.customer_id = customers.customer_id);
+
+---------------------------------------- Question 3 Results ---------------------------------------- 					
+
+         company_name
+------------------------------
+ Around the Horn
+ Berglunds snabbköp
+ Blondesddsl père et fils
+ Bon app'
+ Bottom-Dollar Markets
+ B's Beverages
+ Ernst Handel
+ Folk och fä HB
+ Frankenversand
+ Godos Cocina Típica
+ Great Lakes Food Market
+ Hanari Carnes
+ HILARION-Abastos
+ Hungry Owl All-Night Grocers
+ Island Trading
+ Königlich Essen
+ La maison d'Asie
+ Lehmanns Marktstand
+ LILA-Supermercado
+ LINO-Delicateses
+ Magazzini Alimentari Riuniti
+ Mère Paillarde
+ Old World Delicatessen
+ Ottilies Käseladen
+ Piccolo und mehr
+ Queen Cozinha
+ QUICK-Stop
+ Rattlesnake Canyon Grocery
+ Reggiani Caseifici
+ Ricardo Adocicados
+ Richter Supermarkt
+ Save-a-lot Markets
+ Suprêmes délices
+ Tortuga Restaurante
+ Vaffeljernet
+ Victuailles en stock
+ Die Wandernde Kuh
+ Wartian Herkku
+ White Clover Markets
+(39 rows)
+
+postgres=#	
+
+---------------------------------------- Question 4 Query ---------------------------------------- 
+
+CREATE VIEW category  AS SELECT category_name,COUNT(category_name) FROM categories INNER JOIN products ON (categories.category_id = products.category_id) GROUP BY category_name;
+
+SELECT * FROM category WHERE count > 10;
+
+---------------------------------------- Question 4 Results ---------------------------------------- 					
+
+ category_name | count
+---------------+-------
+ Beverages     |    12
+ Seafood       |    12
+ Condiments    |    12
+ Confections   |    13
+(4 rows)	
+
+---------------------------------------- Question 5 Query ---------------------------------------- 
+
+CREATE VIEW product AS SELECT product_id, sum(quantity) FROM order_details GROUP BY product_id;
+
+SELECT product_name FROM products INNER JOIN product ON (product.product_id = products.product_id) ORDER BY product.sum DESC LIMIT 1;
+
+---------------------------------------- Question 5 Results ---------------------------------------- 					
+
+   product_name
+-------------------
+ Camembert Pierrot
+(1 row)
