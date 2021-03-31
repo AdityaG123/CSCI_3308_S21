@@ -1,0 +1,35 @@
+<!--
+  TODO: Update the EJS code to insert the following information:
+    - display_title
+    - url
+    - suggested_link_text
+    - publication_date
+    - summary_short
+
+  HINT: Not sure how to display the reviews, check out Bootstrap cards here: https://getbootstrap.com/docs/4.0/components/card/
+-->
+<%
+  if (items == null) {
+    var err = '<div class="alert alert-danger">No reviews found for that title. Please try another term.</div>';
+  %>
+  <%- err %>
+  <% }
+  if (items) {
+	  var cards = '';
+    var count = 0;
+	<!-- Iterate the items object & update the cards variable -->
+    items.forEach(function(item){
+      if(count == 3){
+        cards += '</div></br>';
+        count = 0;
+      }
+      if(!count){
+        cards += '<div class="card-deck">';
+      }
+      cards += '<div class="card"><div class="card-body"><h4 class="card-title">'+item.display_title+'</h4><a href="'+item.link.url+'" class="btn btn-primary">'+item.link.suggested_link_text+'</a><p class="card-text">'+item.publication_date+'</p><p class="card-text">'+item.summary_short+'</p></div></div>';
+      count++;
+    }); 
+    cards += '</div>' 
+  %>
+<%- cards %>
+<% } %>
