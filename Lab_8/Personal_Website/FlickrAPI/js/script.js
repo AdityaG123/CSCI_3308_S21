@@ -25,7 +25,7 @@ function searchImg(){
                     columns.setAttribute('class','col-sm-3');
 
                     var card = document.createElement("div");
-                    card.setAttribute('class', 'card')
+                    card.setAttribute('class', 'card');
 
                     var cbody = document.createElement("div");
                     cbody.setAttribute('class', 'card-body');
